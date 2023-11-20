@@ -1,11 +1,9 @@
 import './App.css'
-import responseMovies from './mocks/with-results.json'
-import withoutResults from './mocks/with-no-results.json'
 import { Movies } from './components/movies.jsx'
+import { useMovies } from './hooks.js/useMovies.js'
 
 function App () {
-  const movies = responseMovies.Search
-
+  const { movies: mappedMovies } = useMovies()
   return (
 
     <div className='page'>
@@ -19,7 +17,7 @@ function App () {
       </header>
 
       <main>
-        <Movies movies={movies} />
+        <Movies movies={mappedMovies} />
       </main>
 
     </div>
