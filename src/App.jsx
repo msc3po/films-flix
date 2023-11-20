@@ -1,10 +1,10 @@
 import './App.css'
 import responseMovies from './mocks/with-results.json'
 import withoutResults from './mocks/with-no-results.json'
+import { Movies } from './components/movies'
 
 function App () {
   const movies = responseMovies.Search
-  const hasMovies = movies?.length > 0
 
   return (
 
@@ -19,11 +19,7 @@ function App () {
       </header>
 
       <main>
-        {
-          hasMovies
-            ? renderMovies()
-            : renderNoResults()
-}
+        <Movies movies={movies} />
 
       </main>
 

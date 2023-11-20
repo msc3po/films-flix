@@ -19,3 +19,13 @@ export function noRenoMoviesResult () {
     <p>Has no results</p>
   )
 }
+
+export function Movies ({ movies }) {
+  const hasMovies = movies?.length > 0
+
+  return (
+    hasMovies
+      ? <ListOfMovies movies={movies} />
+      : <noRenoMoviesResult />
+  )
+}
