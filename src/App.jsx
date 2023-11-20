@@ -1,6 +1,11 @@
 import './App.css'
+import responseMovies from './mocks/with-results.json'
+import withoutResults from './mocks/with-no-results.json'
 
 function App () {
+  const movies = responseMovies.Search
+  const hasMovies = movies?.length > 0
+
   return (
 
     <div className='page'>
@@ -14,10 +19,16 @@ function App () {
       </header>
 
       <main>
-        Here will appear the search results
+        {
+          hasMovies
+            ? renderMovies()
+            : renderNoResults()
+}
+
       </main>
 
     </div>
+
   )
 }
 
