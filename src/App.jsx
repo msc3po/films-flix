@@ -5,12 +5,12 @@ import { useMovies } from './hooks.js/useMovies.js'
 
 function App () {
   const { movies } = useMovies()
-  const inputRef = useRef()
 
   const handleSubmmit = (event) => {
     event.preventDefault()
-    const value = inputRef.current.value
-    console.log(value)
+    const fields = Object.fromEntries(new window.FormData(event.target))
+    // const query = fields.get('query')
+    console.log(fields)
   }
 
   return (
@@ -20,7 +20,8 @@ function App () {
       <header>
         <h1> Films Searcher</h1>
         <form className='form' onSubmit={handleSubmmit}>
-          <input ref={inputRef} type='text' placeholder='Star Wars, Star trek...' />
+          <input name='query' type='text' placeholder='Star Wars, Star trek...' />
+          <input name='puery' type='text' placeholder='Star Wars, Star trek...' />
           <button type='submit'>Search</button>
         </form>
       </header>
