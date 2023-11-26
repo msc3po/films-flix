@@ -1,92 +1,47 @@
 import './App.css'
-import { useMovies } from './hooks.js/useMovies.js'
-import { useState, useEffect, useRef } from 'react'
-import { Movies } from './components/Movies.jsx'
+import { useState } from 'react'
 
-function useSearch () {
-  const [search, updateSearch] = useState('')
-  const [error, setError] = useState(null)
-  const isFirstInput = useRef(true)
+import SearchMovies from './mocks/search_Result.json'
 
-  useEffect(() => {
-    if (isFirstInput.current) {
-      isFirstInput.current = search === ''
-      return
-    }
-
-    if (search === '') {
-      setError('No se puede buscar una película vacía')
-      return
-    }
-
-    if (search.match(/^\d+$/)) {
-      setError('No se puede buscar una película con un número')
-      return
-    }
-
-    if (search.length < 3) {
-      setError('La búsqueda debe tener al menos 3 caracteres')
-      return
-    }
-
-    setError(null)
-  }, [search])
-
-  return { search, updateSearch, error }
-}
+const API_KEY = '4287ad07'
+const URL = `http://www.omdbapi.com/?apikey=${API_KEY}&s'avengers'`
+const URL_fixed = 'http://www.omdbapi.com/?apikey=4287ad07&s=\'avengers\''
 
 function App () {
-  const [sort, setSort] = useState(false)
-  const { search, updateSearch, error } = useSearch()
-  const { movies, loading, getMovies } = useMovies({ search, sort })
+  const movies = SearchMovies.Search
 
-  // const debouncedGetMovies = useCallback(
-  //   debounce(search => {
-  //     console.log('search', search)
-  //     getMovies({ search })
-  //   }, 300)
-  //   , [getMovies]
-  // )
+  const [search, setSearch] = useState(false)
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    getMovies({ search })
-  }
-
-  const handleSort = () => {
-    setSort(!sort)
-  }
-
-  const handleChange = (event) => {
-    const newSearch = event.target.value
-    updateSearch(newSearch)
-    debouncedGetMovies(newSearch)
+  const handleClick = () => {
+    setSearch(!search)
   }
 
   return (
-    <div className='page'>
+    <>
+      {console.log(movies)}
 
       <header>
-        <h1>Buscador de películas</h1>
-        <form className='form' onSubmit={handleSubmit}>
-          <input
-            style={{
-              border: '1px solid transparent',
-              borderColor: error ? 'red' : 'transparent'
-            }} onChange={handleChange} value={search} name='query' placeholder='Avengers, Star Wars, The Matrix...'
-          />
-          <input type='checkbox' onChange={handleSort} checked={sort} />
-          <button type='submit'>Buscar</button>
+        <form id='searchMovies'>
+          <input placeholder='Paquita Salas, Avengers, Matrix' />
+          <button type='submit' onClick={handleClick}>Search</button>
         </form>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
       </header>
 
-      <main>
-        {
-          loading ? <p>Cargando...</p> : <Movies movies={movies} />
-        }
+      <main className='main'>
+        <ul>
+          {movies.map((movie) => {
+            return (
+              <li key={movie.imdbID}>
+                <h3>{movie.Title}</h3>
+                <p>{movie.Type} {movie.Year}</p>
+                <img src={movie.Poster} />
+
+              </li>
+            )
+          })}
+        </ul>
       </main>
-    </div>
+    </>
   )
 }
 
