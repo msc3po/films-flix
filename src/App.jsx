@@ -26,14 +26,14 @@ function App () {
       </header>
 
       <main className='main'>
-        <ul>
+        <ul className='movies'>
           {movies.map((movie) => {
-            const { ImdbID, Title, Type, Year, Poster } = movie
+            const { imdbID, Title, Type, Year, Poster } = movie
             return (
-              <li key={ImdbID}>
+              <li key={imdbID} className='movie'>
                 <h3>{Title}</h3>
                 <p>{Type} {Year}</p>
-                <img src={Poster} />
+                <img src={Poster} alt={`Poster of ${Title}`} />
 
               </li>
             )

@@ -24,3 +24,30 @@ Primera iteración:
 ✅ Haz que la búsqueda se haga automáticamente al escribir.
 
 ✅ Evita que se haga la búsqueda continuamente al escribir (debounce)
+
+form{
+align-items: center;
+display: flex;
+justify-content: center;
+
+}
+
+.movies {
+margin: 0;
+padding: 0;
+display: grid;
+width:100%;
+gap: 32px;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.movie {
+text-align: center;
+}
+
+.movie h3, .movie p {
+margin: 0;
+}
+.movie image {
+border-radius: 8px;
+margin-top: 16px;
+}

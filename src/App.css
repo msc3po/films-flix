@@ -15,28 +15,31 @@ main{
 }
 
 form{
-  align-items: center;
-  display: flex;
-  justify-content: center;
-
+ align-items: center;
+ justify-content: center;
+ display: flex;
 }
 
 .movies {
-  margin: 0;
-  padding: 0;
   display: grid;
   width:100%;
   gap: 32px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-.movie {
-  text-align: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+  
+  ;
 }
 
-.movie h3, .movie p {
-  margin: 0;
+.movie {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
-.movie image {
-  border-radius: 8px;
-  margin-top: 16px;
+
+.movie h3 .movie p{
+margin: 0;
+}
+
+.movie img{
+  width: 100%;
+  height: auto;
 }
