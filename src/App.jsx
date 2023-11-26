@@ -18,8 +18,6 @@ function App () {
 
   return (
     <>
-      {console.log(movies)}
-
       <header>
         <form id='searchMovies'>
           <input placeholder='Paquita Salas, Avengers, Matrix' />
@@ -30,11 +28,12 @@ function App () {
       <main className='main'>
         <ul>
           {movies.map((movie) => {
+            const { ImdbID, Title, Type, Year, Poster } = movie
             return (
-              <li key={movie.imdbID}>
-                <h3>{movie.Title}</h3>
-                <p>{movie.Type} {movie.Year}</p>
-                <img src={movie.Poster} />
+              <li key={ImdbID}>
+                <h3>{Title}</h3>
+                <p>{Type} {Year}</p>
+                <img src={Poster} />
 
               </li>
             )
