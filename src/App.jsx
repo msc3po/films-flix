@@ -12,7 +12,8 @@ function App () {
 
   const [search, setSearch] = useState(false)
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault()
     setSearch(!search)
   }
 

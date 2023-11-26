@@ -21,6 +21,9 @@ form{
 }
 
 .movies {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
   width:100%;
   gap: 32px;
@@ -31,15 +34,27 @@ form{
 
 .movie {
   text-align: center;
-  display: flex;
-  flex-direction: column;
+ 
 }
 
-.movie h3 .movie p{
+.movie h3, .movie p {
 margin: 0;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+overflow:hidden
+
 }
 
 .movie img{
-  width: 100%;
-  height: auto;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+.movie h3 {
+  -webkit-line-clamp: 2; /* This will limit the title to two lines */
+  height: 3em; /* Adjust the height as needed */
+}
+
+.movie p {
+  -webkit-line-clamp: 1; /* This will limit the paragraph to one line */
+  height: 1.5em; /* Adjust the height as needed */
 }
