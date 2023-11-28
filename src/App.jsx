@@ -10,7 +10,7 @@ const URL = `http://www.omdbapi.com/?apikey=${API_KEY}&s='avengers'`
 const URL_fixed = 'http://www.omdbapi.com/?apikey=4287ad07&s=avengers'
 
 function App () {
-  const movies = SearchMovies.Search // where the movies are.
+  const { movies: mappedMovies } = useMovies()
 
   const [search, setSearch] = useState(false)
   // const [movies, setMovies] = useState([])
@@ -32,7 +32,7 @@ function App () {
         </form>
       </header>
       <main>
-        <Movies movies={movies} />
+        <Movies movies={mappedMovies} />
       </main>
     </>
   )
