@@ -1,3 +1,5 @@
+
+
 .page {
   display: flex;
   flex-direction: column;
@@ -7,54 +9,39 @@
   max-width: 800px;
 }
 
-main{
+main {
   display: flex;
   justify-content: center;
   width: 100%;
-
 }
 
-form{
- align-items: center;
- justify-content: center;
- display: flex;
+form {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .movies {
   list-style: none;
   margin: 0;
   padding: 0;
+
   display: grid;
-  width:100%;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+ 
+  width: 100%;
   gap: 32px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
-  
-  ;
 }
 
 .movie {
   text-align: center;
- 
 }
 
 .movie h3, .movie p {
-margin: 0;
-display: -webkit-box;
--webkit-box-orient: vertical;
-overflow:hidden
-
+  margin: 0;
 }
 
-.movie img{
+.movie img {
   border-radius: 8px;
   margin-top: 16px;
-}
-.movie h3 {
-  -webkit-line-clamp: 2; /* This will limit the title to two lines */
-  height: 3em; /* Adjust the height as needed */
-}
-
-.movie p {
-  -webkit-line-clamp: 1; /* This will limit the paragraph to one line */
-  height: 1.5em; /* Adjust the height as needed */
 }
