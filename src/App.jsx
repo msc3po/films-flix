@@ -1,5 +1,5 @@
 import './App.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Movies } from './components/movies'
 import { useMovies } from './hooks.js/useMovies'
 
@@ -10,28 +10,17 @@ const API_KEY = '4287ad07'
 const URL = `http://www.omdbapi.com/?apikey=${API_KEY}&s='avengers'`
 const URL_fixed = 'http://www.omdbapi.com/?apikey=4287ad07&s=avengers'
 
-function App () {
-  const { movies: mappedMovies } = useMovies()
+function useSearch () {
   const [search, setSearch] = useState('')
   const [error, setError] = useState('')
+  const isFirstInput = useRef(true)
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    // const fields = new window.FormData(event.target)
-
-  //   fetch('http://www.omdbapi.com/?apikey=4287ad07&s=avengers')
-  //     .then(res => res.json())
-  //     .then(data = res)
-  }
-
-  const handleChange = (event) => {
-    const newQuery = event.target.value
-    console.log(newQuery)
-    if (newQuery.startsWith(' ')) return
-
-    setSearch(event.target.value)
-  }
   useEffect(() => {
+    if (isFirstInput.current) {
+      isFirstInput.current = search === ''
+      return
+    }
+
     if (search === '') {
       setError('no se puede buscar peli vacia')
       return
@@ -46,6 +35,25 @@ function App () {
     }
     setError(null)
   }, [search])
+  return { search, setSearch, error }
+}
+
+function App () {
+  const { movies: mappedMovies } = useMovies()
+  const { search, setSearch, error } = useSearch()
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    // const fields = new window.FormData(event.target)
+
+    //   fetch('http://www.omdbapi.com/?apikey=4287ad07&s=avengers')
+    //     .then(res => res.json())
+    //     .then(data = res)
+  }
+  const handleChange = (event) => {
+    setSearch(event.target.value)
+  }
+
   return (
     <>
       <header>
@@ -53,7 +61,7 @@ function App () {
           <input onChange={handleChange} value={search} name='search' placeholder='Star por star, Warsburg, Avengers...' />
           <button type='submit'>Search</button>
         </form>
-        {error && <p className='error'>{error}</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </header>
       <main>
         <Movies movies={mappedMovies} />
