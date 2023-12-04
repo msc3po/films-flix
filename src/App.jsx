@@ -1,7 +1,7 @@
 import './App.css'
+import { useMovies } from './hooks.js/useMovies'
 import { useEffect, useState, useRef } from 'react'
 import { Movies } from './components/movies'
-import { useMovies } from './hooks.js/useMovies'
 
 import SearchMovies from './mocks/search_Result.json'
 import noResults from './mocks/no_Results.json'
@@ -39,16 +39,12 @@ function useSearch () {
 }
 
 function App () {
-  const { movies: mappedMovies } = useMovies()
   const { search, setSearch, error } = useSearch()
+  const { movies, getMovies } = useMovies({ search })
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    // const fields = new window.FormData(event.target)
-
-    //   fetch('http://www.omdbapi.com/?apikey=4287ad07&s=avengers')
-    //     .then(res => res.json())
-    //     .then(data = res)
+    getMovies()
   }
   const handleChange = (event) => {
     setSearch(event.target.value)
@@ -64,7 +60,7 @@ function App () {
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </header>
       <main>
-        <Movies movies={mappedMovies} />
+        <Movies movies={movies} />
       </main>
     </>
   )
