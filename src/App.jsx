@@ -3,13 +3,6 @@ import { useMovies } from './hooks.js/useMovies'
 import { useEffect, useState, useRef } from 'react'
 import { Movies } from './components/movies'
 
-import SearchMovies from './mocks/search_Result.json'
-import noResults from './mocks/no_Results.json'
-
-const API_KEY = '4287ad07'
-const URL = `http://www.omdbapi.com/?apikey=${API_KEY}&s='avengers'`
-const URL_fixed = 'http://www.omdbapi.com/?apikey=4287ad07&s=avengers'
-
 function useSearch () {
   const [search, setSearch] = useState('')
   const [error, setError] = useState('')
@@ -53,6 +46,7 @@ function App () {
   return (
     <>
       <header>
+        <h3>Film searcher</h3>
         <form id='Form' onSubmit={handleSubmit}>
           <input onChange={handleChange} value={search} name='search' placeholder='Star por star, Warsburg, Avengers...' />
           <button type='submit'>Search</button>
